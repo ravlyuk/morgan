@@ -14,6 +14,11 @@ BOT_NAME = 'morganlewis'
 SPIDER_MODULES = ['morganlewis.spiders']
 NEWSPIDER_MODULE = 'morganlewis.spiders'
 
+ROTATING_PROXY_LIST = [
+    '177.220.145.226:8080',
+    '46.166.151.206:5836',
+]
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'morganlewis (+http://www.yourdomain.com)'
 
@@ -52,11 +57,11 @@ DEFAULT_REQUEST_HEADERS = {
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-# DOWNLOADER_MIDDLEWARES = {
-# 'morganlewis.middlewares.MorganlewisDownloaderMiddleware': 543,
+DOWNLOADER_MIDDLEWARES = {
+    'rotating_proxies.middlewares.RotatingProxyMiddleware': 610,
+    'rotating_proxies.middlewares.BanDetectionMiddleware': 620,
 
-
-# }
+}
 
 USER_AGENT = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:66.0) Gecko/20100101 Firefox/66.0',
 

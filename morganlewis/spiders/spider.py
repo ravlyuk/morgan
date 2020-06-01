@@ -61,7 +61,7 @@ class QuotesSpider(scrapy.Spider):
         item['sectors'] = []
         for service in response.xpath('//div[@class="person-depart-info"]/ul/li/a/@title').extract():
             item['sectors'].append(service)
-        item['brief'] = response.xpath('//div[@class="purple-para arrow-class"]/p/text()').extract()[-1]
+        item['brief'] = response.xpath('//meta[@name="description"]/@content').extract_first()
         item['datetime'] = datetime.now().strftime("%H:%M:%S")
         item['publications'] = response.meta['publications']
         yield item
